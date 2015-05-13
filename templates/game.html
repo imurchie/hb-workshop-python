@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>A Game</title>
+  <script>
+    "use strict";
+    var validateForm = function () {
+      var missing = [];
+      ['person', 'color', 'noun', 'adjective'].forEach(function (field) {
+        if (!document.forms['madlib'][field].value) {
+          missing.push(field);
+        }
+      });
+      if (missing.length > 0) {
+        document.getElementById('errors').innerHTML = '<font color="red">The following fields are missing: ' + missing + '</font>';
+        return false;
+      } else {
+        document.getElementById('errors').innerHTML = '';
+        return true;
+      }
+    };
+  </script>
+</head>
+<body>
+  <form name="madlib" action="/madlib" method="post" onsubmit="return validateForm();">
+    <div id="errors"></div>
+    Please choose a person: <input type="text" name="person" /><br>
+    And a color: <select name="color">
+      <option value="red">red</option>
+      <option value="orange">orange</option>
+      <option value="yellow">yellow</option>
+      <option value="green">green</option>
+      <option value="blue">blue</option>
+      <option value="indigo">indigo</option>
+      <option value="violet">violet</option>
+      <option value="other">no! let me be free!</option>
+    </select><br>
+    A noun: <input type="text" name="noun" /><br>
+    And finally an adjective: <input type="text" name="adjective" /><br>
+    <input type="submit" value="Submit" />
+  </form>
+</body>
