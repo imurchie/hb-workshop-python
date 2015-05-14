@@ -1,9 +1,7 @@
 from random import choice
 from flask import Flask, render_template, request
 
-
 app = Flask(__name__)
-
 
 # route to handle the landing page of a website.
 @app.route('/')
@@ -29,7 +27,8 @@ def greet_person():
 
     compliment = choice(AWESOMENESS)
 
-    return render_template("compliment.html", person=player, compliment=compliment)
+    return render_template("compliment.html", person=player,
+        compliment=compliment)
 
 
 @app.route('/game', methods=['POST'])
@@ -41,12 +40,16 @@ def show_game_form():
 
 
 madlibs = [
-    "There once was a {color} {noun} sitting in the Hackbright Lab. When {person} went to pick it up, it burst into flames in a totally {adjective} way."
+    'There once was a {color} {noun} sitting in the Hackbright Lab. When \
+    {person} went to pick it up, it burst into flames in a totally {adjective} \
+    way.',
+    'Every {color} {noun} waits for {adjective} stuff with {person}.',
 ]
 
 
 @app.route('/madlib', methods=['POST'])
 def show_madlib():
+    random_variable = 42
     defaults = ['noun', 'person', 'color', 'adjective']
     args = dict()
     for el in defaults:
