@@ -1,7 +1,9 @@
+import new
 import os
 import sys
 import unittest
 from selenium import webdriver
+from sauceclient import SauceClient
 
 USERNAME = os.environ.get('SAUCE_USERNAME')
 ACCESS_KEY = os.environ.get('SAUCE_ACCESS_KEY')
@@ -35,8 +37,9 @@ def on_platforms(platforms):
     return decorator
 
 
+@on_platforms(browsers)
 class MadlibFunctionalTests(unittest.TestCase):
-    host = 'http://localhost:5000/%s'
+    host = 'https://hb-workshop-python.herokuapp.com/%s'
 
     def setUp(self):
         self.desired_capabilities['name'] = self.id()
